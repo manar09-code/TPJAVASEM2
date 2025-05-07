@@ -1,26 +1,57 @@
 import java.util.Scanner;
 
 public class app1 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Entrez une chaîne de caractères (max 50 caractères) : ");
-        String  ch = scanner.nextLine();
-        StringBuffer ch = new StringBuffer();
-
-        System.out.print("Entrez mot1 (max 10 caractères) : ");
-        StringBuffer mot1 = new StringBuffer();
-
-        System.out.print("Entrez mot2 (max 10 caractères) : ");
-        StringBuffer mot2 = new StringBuffer();
-
-        if (ch.length() > 50 || mot1.length() > 10 || mot2.length() > 10) {
-            System.out.println("Erreur : La longueur dépasse la limite.");
-        } else {
-            ch = ch.replace(mot1, mot2);
-            System.out.println("Résultat : " + ch);
+        public static int lectureN() {
+            Scanner sc = new Scanner(System.in);
+            int n = -1
+            ;
+            while (n <= 0) {
+                System.out.print("Entrez un entier strictement positif : ");
+                if (sc.hasNextInt()) {
+                    n = sc.nextInt();
+                    if (n <= 0) {
+                        System.out.println("L'entier doit être strictement positif.");
+                    }
+                } else {
+                    System.out.println("Ce n'est pas un entier  !");
+                    sc.next(); 
+                }
+            }
+            return n;
         }
-
-        scanner.close();
+        public static void RemplirTab(int[] tab) {
+            Scanner sc = new Scanner(System.in);
+            for (int i = 0; i < tab.length; i++) {
+                System.out.print("T[" + i + "] = ");
+                tab[i] = sc.nextInt();
+            }
+        }
+        public static void Remplacer(int[] tab, int x1, int x2) {
+            for (int i = 0; i < tab.length; i++) {
+                if (tab[i] == x1) {
+                    tab[i] = x2;
+                }
+            }
+        public static void AfficheTab(int[] tab) {
+            System.out.print("Contenu du tableau : ");
+            for (int val : tab) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+        public static void main(String[] args) {
+            int n = lectureN();
+            int[] T = new int[n];
+            RemplirTab(T);
+    
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Entrez la valeur X1 à remplacer : ");
+            int x1 = sc.nextInt();
+            System.out.print("Entrez la valeur X2 de remplacement : ");
+            int x2 = sc.nextInt();
+    
+            Remplacer(T, x1, x2);
+            AfficheTab(T);
+        }
     }
 }
