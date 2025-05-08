@@ -1,32 +1,108 @@
 import java.util.Scanner;
 
 public class app3 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Entrez une chaîne de caractères (max 20 caractères) : ");
-        StringBuffer ch = new StringBuffer();
-
-        if (ch.length() > 20) {
-            System.out.println("Erreur : La longueur dépasse la limite.");
-        } else {
-            StringBuffer result = new StringBuffer();
-            boolean capitalizeNext = true;
-
-            for (int i = 0; i < ch.length(); i++) {
-                char c = ch.charAt(i);
-                if (capitalizeNext && Character.isLetter(c)) {
-                    c = Character.toUpperCase(c);
-                    capitalizeNext = false;
-                } else if (c == ' ') {
-                    capitalizeNext = true;
+    public static int lectureN() {
+        Scanner sc = new Scanner(System.in);
+        int n = -1;
+        while (n <= 0) {
+            System.out.print("Entrez un entier strictement positif : ");
+            if (sc.hasNextInt()) {
+                n = sc.nextInt();
+                if (n <= 0) {
+                    System.out.println("L'entier doit être strictement positif.");
                 }
-                result.append(c);
+            } else {
+                System.out.println("Ce n'est pas un entier !");
+                sc.next(); 
             }
-
-            System.out.println("Résultat : " + result.toString());
         }
+        return n;
+    }
 
-        scanner.close();
+    public static void RemplirTab(int[] tab) {
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < tab.length; i++) {
+            while (true) {
+                System.out.print("T[" + i + "] = ");
+                if (sc.hasNextInt()) {
+                    int num = sc.nextInt();
+                    if (num >= 0) {  // Check for positive numbers
+                        tab[i] = num;
+                        break;
+                    } else {
+                        System.out.println("Le nombre doit être positif !");
+                    }
+                } else {
+                    System.out.println("Ce n'est pas un entier !");
+                    sc.next();
+                }
+            }
+        }
+    }
+    
+    public static int[] creerTableauPairs(int[] tab) {
+        int comptePairs = 0;
+        for (int nombre : tab) {
+            if (nombre % 2 == 0) comptePairs++;
+        }
+        
+        int[] pairs = new int[comptePairs];
+        int index = 0;
+        
+        for (int nombre : tab) {
+            if (nombre % 2 == 0) {
+                pairs[index] = nombre;
+                index++;
+            }
+        }
+        return pairs;
+    }
+
+    public static int[] creerTableauImpairs(int[] tab) {
+        int compteImpairs = 0;
+        for (int nombre : tab) {
+            if (nombre % 2 != 0) compteImpairs++;
+        }
+        
+        int[] impairs = new int[compteImpairs];
+        int index = 0;
+        
+        for (int nombre : tab) {
+            if (nombre % 2 != 0) {
+                impairs[index] = nombre;
+                index++;
+            }
+        }
+        return impairs;
+    }
+    
+    public static void AfficheTAb(int[] tab) {
+        System.out.print("[");
+        for (int i = 0; i < tab.length; i++) {
+            System.out.print(tab[i]);
+            if (i < tab.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Création du tableau T:");
+        int n = lectureN();
+        int[] T = new int[n];
+        
+        RemplirTab(T);
+        
+        System.out.println("\nTableau original T:");
+        AfficheTAb(T);
+        
+        int[] T_pair = creerTableauPairs(T);
+        System.out.println("\nTableau des nombres pairs:");
+        AfficheTAb(T_pair);
+        
+        int[] T_impair = creerTableauImpairs(T);
+        System.out.println("Tableau des nombres impairs:");
+        AfficheTAb(T_impair);
     }
 }
