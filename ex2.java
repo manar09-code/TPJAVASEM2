@@ -1,7 +1,7 @@
 public class Vecteur {
     private double[] elements;
     
-    // Crée un vecteur avec des valeurs
+    // Creation d'un vecteur 
     public Vecteur(double... valeurs) {
         this.elements = valeurs;
     }
@@ -31,18 +31,4 @@ public class Vecteur {
         }
         System.out.println();
     }
-    
-    // Exemple d'utilisation
-    public static void main(String[] args) {
-        Vecteur v1 = new Vecteur(1, 2, 3);
-        Vecteur v2 = new Vecteur(4, 5, 6);
-        
-        System.out.print("Vecteur 1: "); v1.afficher();
-        System.out.print("Vecteur 2: "); v2.afficher();
-        
-        Vecteur somme = v1.ajouter(v2);
-        System.out.print("Somme: "); somme.afficher();
-        
-        System.out.println("Produit scalaire: " + v1.produitScalaire(v2));
-    }
-}
+  
