@@ -1,70 +1,27 @@
 import java.util.Scanner;
 
-public class App4 {
-    public static int lectureN() {
+public class app4 {
+    public static String Lecture() {
         Scanner sc = new Scanner(System.in);
-        int n = -1;
-        while (n <= 0) {
-            System.out.print("Entrez un entier strictement positif : ");
-            if (sc.hasNextInt()) {
-                n = sc.nextInt();
-                if (n <= 0) {
-                    System.out.println("L'entier doit être strictement positif.");
-                }
-            } else {
-                System.out.println("Ce n'est pas un entier !");
-                sc.next(); 
-            }
-        }
-        return n;
+        String ch;
+        do {
+            System.out.print("Saisir une chaîne (max 30 caractères) : ");
+            ch = sc.next();
+        } while (ch.length() > 30);
+        return ch;
     }
 
-    public static void RemplirTAb(double[][] matrice, int n1, int n2) {
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < n1; i++) {
-            for (int j = 0; j < n2; j++) {
-                System.out.print("M[" + i + "][" + j + "] = ");
-                matrice[i][j] = sc.nextDouble();
-            }
+    public static void Palindrom_rec(String ch) {
+        if (ch.charAt(0) == ch.charAt(ch.length() - 1)) {
+            System.out.println("Le mot est un palindrome.");
+
+        } else {
+            System.out.println("Le mot n'est pas un palindrome.");
         }
     }
-    
-    public static double CalculSomme(double[][] matrice, int n2, int i) {
-        double somme = 0.0;
-        for (int j = 0; j < n2; j++) {
-            somme += matrice[i][j];
-        }
-        return somme;
-    }
-    
-    public static void AfficheTAb(double[][] matrice, int n1, int n2) {
-        for (int i = 0; i < n1; i++) {
-            for (int j = 0; j < n2; j++) {
-                System.out.print(matrice[i][j] + "\t");
-            }
-            System.out.println();
-        }
-    }
-    
+
     public static void main(String[] args) {
-        System.out.println("Saisie de la matrice M:");
-        
-        System.out.println("Nombre de lignes (n1):");
-        int n1 = lectureN();
-        
-        System.out.println("Nombre de colonnes (n2):");
-        int n2 = lectureN();
-        
-        double[][] M = new double[n1][n2];
-        RemplirTAb(M, n1, n2);
-        
-        System.out.println("\nMatrice M:");
-        AfficheTAb(M, n1, n2);
-        
-        System.out.println("\nSommes par ligne:");
-        for (int i = 0; i < n1; i++) {
-            double somme = CalculSomme(M, n2, i);
-            System.out.println("Ligne " + i + " : " + somme);
-        }
+        String mot = Lecture();
+        Palindrom_rec(mot);
     }
 }
